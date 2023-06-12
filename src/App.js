@@ -1,46 +1,35 @@
 import './App.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Akshat from './assets/Akshat.png'
 import Jheel from './assets/Jheel.png'
-import Preet from './assets/Preet.png'
 import Reet from './assets/Reet.png'
+import Preet from './assets/Preet.png'
+import Dice from './Dice'
 
 function App() {
-    const images = [Akshat, Jheel, Preet, Reet]
-
-    const [attacker, setAttacker] = useState(0)
-    const [defender, setDefender] = useState(0)
-
-    useEffect(() => {
-        if (attacker === defender) shuffleIndex()
-    }, [])
-
-    const shuffleIndex = () => {
-        console.log('Fired')
-        const idx1 = Math.floor(Math.random() * 4)
-        const idx2 = Math.floor(Math.random() * 4)
-        setDefender(idx1)
-        setAttacker(idx2)
-    }
+    const images = [Akshat, Jheel, Reet, Preet]
+    const [winner, setWinner] = useState(0)
+    const [looser, setLooser] = useState(0)
 
     return (
         <>
-            <div className='App'>
-                <img
-                    src={images[attacker]}
-                    style={{ width: '200px', height: '200px' }}
-                    alt=''
-                />
-                <img
-                    src={images[defender]}
-                    style={{ width: '200px', height: '200px' }}
-                    alt=''
-                />
+            <h1>Lakshya Game v1.0</h1>
+            <Dice winner={winner} looser={looser} setWinner={setWinner} setLooser={setLooser}/>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                <h1>Winner</h1>
+                <h1>Looser</h1>
             </div>
-            <div className='button-box'>
-                <button className='button-50' onClick={shuffleIndex}>
-                    Shuffle
-                </button>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
+                <img
+                    src={images[winner]}
+                    style={{ width: '80px', height: '80px' }}
+                    alt=''
+                />
+                <img
+                    src={images[looser]}
+                    style={{ width: '80px', height: '80px' }}
+                    alt=''
+                />
             </div>
         </>
     )
